@@ -1,0 +1,67 @@
+@page
+@model PujcovnaUi.Pages.AssetsModel
+@{
+    ViewData["Title"] = "Assets";
+}
+
+<h1>Assets</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{
+    <div class="alert alert-danger">@Model.Error</div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.Success))
+{
+    <div class="alert alert-success">@Model.Success</div>
+}
+
+<h3>Add asset</h3>
+<form method="post" asp-page-handler="Add" class="mb-4">
+    <div class="mb-2">
+        <label>Category</label>
+        <select name="CategoryId" class="form-select" required>
+            @foreach (var c in Model.Categories)
+            {
+                <option value="@c.CategoryId">@c.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-2">
+        <label>Name</label>
+        <input class="form-control" name="Name" required />
+    </div>
+
+    <div class="mb-2">
+        <label>Serial number</label>
+        <input class="form-control" name="SerialNumber" required />
+    </div>
+
+    <div class="mb-2">
+        <label>Purchase price</label>
+        <input class="form-control" name="PurchasePrice" type="number" step="0.01" required />
+    </div>
+
+    <button class="btn btn-primary">Add</button>
+</form>
+
+<h3>All assets</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th><th>Name</th><th>Serial</th><th>Category</th><th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var a in Model.Assets)
+    {
+        <tr>
+            <td>@a.AssetId</td>
+            <td>@a.Name</td>
+            <td>@a.SerialNumber</td>
+            <td>@a.CategoryName</td>
+            <td>@a.PurchasePrice</td>
+        </tr>
+    }
+    </tbody>
+</table>

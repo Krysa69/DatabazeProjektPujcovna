@@ -1,0 +1,26 @@
+@page
+@model PujcovnaUi.Pages.ReportsModel
+
+<h1>Reports</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Asset</th>
+            <th>Category</th>
+            <th>Times loaned</th>
+            <th>Last loan</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var r in Model.Rows)
+    {
+        <tr>
+            <td>@r.AssetName</td>
+            <td>@r.CategoryName</td>
+            <td>@r.TimesLoaned</td>
+            <td>@r.LastLoan</td>
+        </tr>
+    }
+    </tbody>
+</table>

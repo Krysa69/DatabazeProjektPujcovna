@@ -1,0 +1,23 @@
+@page
+@model PujcovnaUi.Pages.ImportModel
+
+<h1>Import</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-2">
+        <label>Users CSV</label>
+        <input type="file" name="UsersCsv" />
+    </div>
+
+    <div class="mb-2">
+        <label>Assets JSON</label>
+        <input type="file" name="AssetsJson" />
+    </div>
+
+    <button class="btn btn-primary">Import</button>
+</form>

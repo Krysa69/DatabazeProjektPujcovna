@@ -1,0 +1,45 @@
+@page
+@model PujcovnaUi.Pages.TransferPointsModel
+@{
+    ViewData["Title"] = "Transfer Points";
+}
+
+<h1>Transfer points</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{
+    <div class="alert alert-danger">@Model.Error</div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.Success))
+{
+    <div class="alert alert-success">@Model.Success</div>
+}
+
+<form method="post">
+    <div class="mb-2">
+        <label>From user</label>
+        <select name="FromUserId" class="form-select">
+            @foreach (var u in Model.Users)
+            {
+                <option value="@u.UserId">@u.FullName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-2">
+        <label>To user</label>
+        <select name="ToUserId" class="form-select">
+            @foreach (var u in Model.Users)
+            {
+                <option value="@u.UserId">@u.FullName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-2">
+        <label>Amount</label>
+        <input class="form-control" type="number" name="Amount" required />
+    </div>
+
+    <button class="btn btn-primary">Transfer</button>
+</form>

@@ -1,0 +1,44 @@
+@page
+@model PujcovnaUi.Pages.CreateLoanModel
+@{
+    ViewData["Title"] = "Create Loan";
+}
+
+<h1>Create loan</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{
+    <div class="alert alert-danger">@Model.Error</div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.Success))
+{
+    <div class="alert alert-success">@Model.Success</div>
+}
+
+<form method="post">
+    <div class="mb-2">
+        <label>User</label>
+        <select name="UserId" class="form-select" required>
+            @foreach (var u in Model.Users)
+            {
+                <option value="@u.UserId">@u.FullName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-2">
+        <label>Due date</label>
+        <input type="date" name="DueDate" class="form-control" required />
+    </div>
+
+    <h4>Select assets</h4>
+    @foreach (var a in Model.Assets)
+    {
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="AssetIds" value="@a.AssetId" />
+            <label class="form-check-label">@a.Name (@a.SerialNumber)</label>
+        </div>
+    }
+
+    <button class="btn btn-primary mt-3">Create loan</button>
+</form>

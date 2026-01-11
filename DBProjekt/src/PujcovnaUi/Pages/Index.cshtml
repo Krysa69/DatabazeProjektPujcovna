@@ -1,0 +1,28 @@
+﻿@page
+@model PujcovnaUi.Pages.IndexModel
+@{
+    ViewData["Title"] = "Půjčovna – hlavní stránka";
+}
+
+<h1>Půjčovna</h1>
+
+<p>
+    Tato aplikace slouží k evidenci uživatelů, majetku a výpůjček.
+    Data jsou ukládána v relační databázi Microsoft SQL Server.
+</p>
+
+<h3>Funkce aplikace</h3>
+<ul>
+    <li><a asp-page="/Users">Správa uživatelů (CRUD)</a></li>
+    <li><a asp-page="/Assets">Správa majetku (CRUD)</a></li>
+    <li><a asp-page="/CreateLoan">Vytvoření výpůjčky (transakce)</a></li>
+    <li><a asp-page="/TransferPoints">Převod bodů (transakce)</a></li>
+    <li><a asp-page="/Reports">Souhrnné reporty</a></li>
+    <li><a asp-page="/Import">Import dat (CSV / JSON)</a></li>
+</ul>
+
+<hr />
+
+<p>
+    Projekt splňuje zadání D1 – Repository pattern.
+</p>

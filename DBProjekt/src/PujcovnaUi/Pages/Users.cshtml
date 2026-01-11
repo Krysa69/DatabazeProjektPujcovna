@@ -1,0 +1,72 @@
+@page
+@model PujcovnaUi.Pages.UsersModel
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h1>Users</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{
+    <div class="alert alert-danger">@Model.Error</div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.Success))
+{
+    <div class="alert alert-success">@Model.Success</div>
+}
+
+<h3>Add user</h3>
+<form method="post" asp-page-handler="Add" class="mb-4">
+    <div class="mb-2">
+        <label class="form-label">Full name</label>
+        <input class="form-control" name="FullName" required minlength="3" />
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Email</label>
+        <input class="form-control" name="Email" required type="email" />
+    </div>
+    <button class="btn btn-primary" type="submit">Add</button>
+</form>
+
+<h3>All users</h3>
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th style="width:80px;">Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th style="width:90px;">Active</th>
+            <th style="width:180px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var u in Model.Users)
+    {
+        <tr>
+            <td>@u.UserId</td>
+
+            <td>
+                <form method="post" asp-page-handler="Update" class="d-flex gap-2">
+                    <input type="hidden" name="UserId" value="@u.UserId" />
+                    <input class="form-control" name="FullName" value="@u.FullName" />
+                    <input class="form-control" name="Email" value="@u.Email" />
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" name="IsActive" value="true" @(u.IsActive ? "checked" : "") />
+                    </div>
+                    <button class="btn btn-success" type="submit">Save</button>
+                </form>
+            </td>
+
+            <td></td>
+            <td></td>
+
+            <td>
+                <form method="post" asp-page-handler="Delete" onsubmit="return confirm('Delete this user?');">
+                    <input type="hidden" name="UserId" value="@u.UserId" />
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
